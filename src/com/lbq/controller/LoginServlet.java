@@ -1,7 +1,6 @@
 package com.lbq.controller;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
