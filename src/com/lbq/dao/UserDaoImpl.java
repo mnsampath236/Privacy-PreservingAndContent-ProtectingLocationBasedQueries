@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
 		String result = Constants.FAIL;
 		String query = "insert into user values ('" + user.getUserId() + "','" + user.getFirstName() + "','"
 				+ user.getLastName() + "','" + user.getMobile() + "','" + user.getEmilId() + "','" + user.getPassword()
-				+ "')";
+				+ "',0)";
 		int response = DBUtil.insert(query);
 		if (response > 0) {
 			result = Constants.SUCCESS;
