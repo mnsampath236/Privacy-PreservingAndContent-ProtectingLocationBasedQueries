@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<%
+	
+%>
 <html>
 <head>
 <title>Privacy-Preserving and Content-Protecting Location Based
@@ -40,7 +43,7 @@
 	</section>
 	<div id="body">
 		<div id="left">
-			<form method="get" action="./Map.jsp">
+			<form method="get" action="./MapAction">
 				<table>
 					<tr>
 						<td>Search key</td>

@@ -6,7 +6,7 @@ import com.lbq.model.User;
 
 public interface UserDao {
 
-    String login(User user);
+    User login(User user);
     String register(User user);
     List<User> getUsers();
     String acivateUser(User user);

@@ -18,7 +18,7 @@ public class HistoryUtil {
 				while(rs.next()) {
 					History history = new History();
 					history.setId(rs.getInt(1));
-					history.setUserId(rs.getInt(2));
+					history.setUserId(rs.getString(2));
 					history.setSearchKey(rs.getString(3));
 					history.setDate(rs.getDate(4));
 					historyList.add(history);

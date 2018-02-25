@@ -15,7 +15,7 @@ public class HistoryDaoImpl implements HistoryDao {
 		java.util.Date dt = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String currentTime = sdf.format(dt);
-		String query = "insert into history (user_id,search_key,date) values(" + history.getUserId() + ",'"
+		String query = "insert into history (user_id,search_key,date) values('" + history.getUserId() + "','"
 				+ history.getSearchKey() + "','" + currentTime + "')";
 		int response = DBUtil.insert(query);
 		if (response > 0) {
@@ -23,19 +23,28 @@ public class HistoryDaoImpl implements HistoryDao {
 		} else if (response == -1) {
 			result = Constants.DUPLICATE_ID;
 		}
-		Logger.getLogger(UserDaoImpl.class.getName()).log(Level.INFO, "Register result : " + result);
+		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "recordSearchHistory result : " + result);
 		return result;
 	}
 
 	public List<History> getSearchHistoryByDate(History history) {
+		String result = Constants.EMPTY;
+
+		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate result : " + result);
 		return null;
 	}
 
 	public List<History> getSearchHistoryByUserId(History history) {
+		String result = Constants.EMPTY;
+
+		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate result : " + result);
 		return null;
 	}
 
 	public List<History> getSearchHistoryByUserIdAndSearchKey(History history) {
+		String result = Constants.EMPTY;
+
+		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate result : " + result);
 		return null;
 	}
 

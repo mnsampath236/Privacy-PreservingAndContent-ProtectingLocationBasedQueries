@@ -37,7 +37,8 @@
 		</nav>
 	</div>
 	</header>
-	<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+	<a href="#menu" class="navPanelToggle">
+	<span class="fa fa-bars"></span></a>
 
 	<!-- Main -->
 	<section id="main">

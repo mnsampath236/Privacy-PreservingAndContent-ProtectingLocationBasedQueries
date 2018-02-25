@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lbq.dao.UserDao;
 import com.lbq.dao.UserDaoImpl;
@@ -38,12 +39,14 @@ public class LoginServlet extends HttpServlet {
 		user.setUserId(username);
 		user.setPassword(password);
 		UserDao dao = new UserDaoImpl();
-		String loginResp = dao.login(user);
-		request.setAttribute("loginResp", loginResp);
-		request.setAttribute("userId", username );
-		if("admin@email.com".equalsIgnoreCase(username)) {
+		User loginResult = dao.login(user);
+		HttpSession session = request.getSession();
+		request.setAttribute("loginResp", (loginResult!=null)?Constants.SUCCESS:Constants.FAIL);
+		request.setAttribute("user", loginResult );
+		
+		if(loginResult!=null && "admin@email.com".equalsIgnoreCase(username)) {
 			request.getRequestDispatcher("./AdminHome.jsp").forward(request, response);
-		}else if(Constants.SUCCESS.equalsIgnoreCase(loginResp)) {
+		}else if(loginResult!=null) {
 			request.getRequestDispatcher("./UserOperations.jsp").forward(request, response);
 		}else {
 			out.print("<script>alert('Login Fail.');</script>");

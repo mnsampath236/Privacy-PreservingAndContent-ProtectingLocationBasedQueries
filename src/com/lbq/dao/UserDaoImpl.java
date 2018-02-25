@@ -13,20 +13,20 @@ import com.lbq.util.UserUtil;
 
 public class UserDaoImpl implements UserDao {
 
-	public String login(User user) {
+	public User login(User user) {
+		User userResult = null;
 		if ("admin".equalsIgnoreCase(user.getUserId()) && "admin".equalsIgnoreCase(user.getPassword())) {
-			return Constants.SUCCESS;
+			userResult = new User();
+			userResult=user;
 		} else {
 			String query = "select * from user where userid = '" + user.getUserId() + "' and password = '"
 					+ user.getPassword() + "'";
-			String result = Constants.FAIL;
 			ResultSet rs = DBUtil.getData(query);
+			List<User> parseResultSet = UserUtil.parseResultSet(rs);
 			try {
-				if (rs != null && rs.next()) {
-					result = Constants.SUCCESS;
+				if(parseResultSet.size()>0) {
+					userResult = parseResultSet.get(0);
 				}
-			} catch (SQLException ex) {
-				Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
 			} finally {
 				if (rs != null) {
 					try {
@@ -43,10 +43,9 @@ public class UserDaoImpl implements UserDao {
 					}
 				}
 			}
-
-			Logger.getLogger(UserDaoImpl.class.getName()).log(Level.INFO, "Login result : " + result);
-			return result;
 		}
+		Logger.getLogger(UserDaoImpl.class.getName()).log(Level.INFO, "Login result : " + userResult);
+		return userResult;
 	}
 
 	public String register(User user) {
@@ -75,7 +74,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public String acivateUser(User user) {
-		
+
 		String result = Constants.FAIL;
 		String query = "update user set active = 1 where userid = '"+user.getUserId()+"'";
 		int response = DBUtil.insert(query);

@@ -1,8 +1,9 @@
+<%@page import="com.lbq.model.User"%>
 <%@page import="com.lbq.util.Constants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-    	String regResp = (String) request.getAttribute("loginResp");
+    	User user = (User) request.getAttribute("user");
 		String userId = (String) request.getAttribute("userId");
 
     %>
@@ -17,8 +18,7 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 <script type="text/javascript">
     	function validation() {
-			var resp = '<%=regResp%>';
-			alert(resp);
+			var resp = '<%= (user!=null)?Constants.SUCCESS:Constants.FAIL%>';
 			if('<%=Constants.SUCCESS%>' == resp){
 				alert("Login Success.");
 			}else if('<%=Constants.FAIL%>' == resp){
@@ -27,14 +27,13 @@
 		}
     </script>
 </head>
-<body>
+<body onload="javascript:validation();">
 	<!-- Header -->
 	<header id="header">
 	<div class="inner">
 		<a href="index.html" class="logo"><img
 			src="./images/building_society.jpg"></a>
-		<nav id="nav"> <a href="adminhome.jsp">Home</a> <a
-			href="generatebill.jsp">GenerateBill</a> <a href="logout.jsp">Logout</a>
+		<nav id="nav"> <a href="#">Home</a><a href="index.html">Logout</a>
 		</nav>
 	</div>
 	</header>
@@ -50,7 +49,7 @@
 		<p>
 			<table>
 				<tr>
-					<td><a href="Search.jsp">Search</a></td>
+					<td><a href="./SearchAction">Search</a></td>
 				</tr>
 				<tr>
 					<td><a href="./DeleteUserServlet?userid=<%=userId%>">DeleteUser</a></td>
