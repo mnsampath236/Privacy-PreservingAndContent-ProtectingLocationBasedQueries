@@ -36,7 +36,7 @@ public class RegistrationServlet extends HttpServlet {
 		String mobile = (String) request.getParameter("mobile");
 		String email = (String) request.getParameter("email");
 		String password = (String) request.getParameter("password");
-		User user = new User(firstName, lastName, email, mobile, email, password);
+		User user = new User(firstName, lastName, email, mobile, email, password,0);
 		UserDao daoImpl = new UserDaoImpl();
 		String regResp = daoImpl.register(user);
 		request.setAttribute("regResp", regResp);

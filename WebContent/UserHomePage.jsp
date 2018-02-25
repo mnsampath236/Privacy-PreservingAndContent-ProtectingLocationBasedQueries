@@ -35,9 +35,7 @@
 
 		<div id="body">
 			<div id="left">
-				<a href="UserLogin.jsp">User Login</a><br>
-				<a href="UserRegistration.jsp">User Registration</a><br>
-				<a href="AdminLogin.jsp">Admin Login</a><br>
+				<a href="index.html">Home Page</a><br>
 				<a href="Contact.jsp">Contact</a><br>
 			</div>
 			<div id="right">

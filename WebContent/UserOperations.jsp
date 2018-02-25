@@ -3,6 +3,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%
     	String regResp = (String) request.getAttribute("loginResp");
+		String userId = (String) request.getAttribute("userId");
+
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -46,16 +48,14 @@
 		</header>
 
 		<p>
-		<form action="./LoginAction" method="post" name="user_login">
 			<table>
 				<tr>
 					<td><a href="Search.jsp">Search</a></td>
 				</tr>
 				<tr>
-					<td><a href="deleteuser.jsp">DeleteUser</a></td>
+					<td><a href="./DeleteUserServlet?userid=<%=userId%>">DeleteUser</a></td>
 				</tr>
 			</table>
-		</form>
 
 	</div>
 	</section>
