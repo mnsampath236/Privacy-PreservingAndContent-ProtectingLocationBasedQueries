@@ -51,7 +51,7 @@
 					<tr>
 						<td><label>Mobile</label></td>
 						<td><input type="tel" id="mobile" name="mobile"
-							placeholder="Mobile Number" required="required"></td>
+							placeholder="Mobile Number" required="required" maxlength="10" min="10"></td>
 					</tr>
 					<tr>
 						<td><label>Email Id</label></td>

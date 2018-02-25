@@ -7,4 +7,5 @@ public interface Constants {
     String DUPLICATE_ID="ID existed please try new ID";
     String RECORD_NOT_EXIST="Record not exist";
     String EMPTY="";
+    String IN_ACTIVE="inactive";
 }

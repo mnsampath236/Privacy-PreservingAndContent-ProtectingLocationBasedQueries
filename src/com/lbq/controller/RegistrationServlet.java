@@ -40,7 +40,7 @@ public class RegistrationServlet extends HttpServlet {
 		UserDao daoImpl = new UserDaoImpl();
 		String regResp = daoImpl.register(user);
 		request.setAttribute("regResp", regResp);
-		request.getRequestDispatcher("./UserHomePage.jsp").forward(request, response);
+		request.getRequestDispatcher("./UserLogin.jsp").forward(request, response);
 	}
 
 	/**

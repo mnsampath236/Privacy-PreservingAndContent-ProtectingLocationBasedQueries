@@ -1,7 +1,8 @@
 package com.lbq.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,26 +33,32 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String loginResponse = Constants.FAIL;
 		String username= (String) request.getParameter("email");
-		String password = (String)request.getParameter("password");
-		PrintWriter out = response.getWriter(); 
+		String password = (String) request.getParameter("password");
 		User user = new User();
 		user.setUserId(username);
 		user.setPassword(password);
 		UserDao dao = new UserDaoImpl();
 		User loginResult = dao.login(user);
 		HttpSession session = request.getSession();
-		request.setAttribute("loginResp", (loginResult!=null)?Constants.SUCCESS:Constants.FAIL);
 		request.setAttribute("user", loginResult );
 		
 		if(loginResult!=null && "admin@email.com".equalsIgnoreCase(username)) {
+			loginResponse= Constants.SUCCESS;
 			request.getRequestDispatcher("./AdminHome.jsp").forward(request, response);
-		}else if(loginResult!=null) {
+		}else if(loginResult!=null && loginResult.getActive() != 0) {
+			loginResponse= Constants.SUCCESS;
+			request.getRequestDispatcher("./UserOperations.jsp").forward(request, response);
+		}else if(loginResult!=null && loginResult.getActive() == 0){
+			loginResponse= Constants.IN_ACTIVE;
 			request.getRequestDispatcher("./UserOperations.jsp").forward(request, response);
 		}else {
-			out.print("<script>alert('Login Fail.');</script>");
-			request.getRequestDispatcher("./UserLogin.jsp").forward(request, response);
+			loginResponse= Constants.FAIL;
+			request.getRequestDispatcher("./UserOperations.jsp").forward(request, response);
 		}
+		session.setAttribute("loginResponse", loginResponse);
+		Logger.getLogger(LoginServlet.class.getName()).log(Level.INFO, "LoginServlet loginResponse : " + loginResponse);
 	}
 
 	/**
