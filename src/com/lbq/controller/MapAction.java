@@ -36,9 +36,10 @@ public class MapAction extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String searchKey = (String) request.getParameter("searchKey");
 		String location = (String) request.getParameter("location");
-		User user = (User) request.getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
+		System.out.println("User inside Map action : "+request.getSession().getAttribute("user"));
 		new HistoryDaoImpl().recordSearchHistory(new History(0, (user!=null)?user.getUserId():"", searchKey+ " , " + location, new Date()));
-		request.setAttribute("searchKey", searchKey + " , " +location);
+		request.getSession().setAttribute("searchKey", searchKey + " , " +location);
 		request.getRequestDispatcher("./Map.jsp").forward(request, response);
 	}
 

@@ -3,8 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	User user = (User) request.getAttribute("user");
-	String userId = (String) request.getAttribute("userId");
+	User user = (User) session.getAttribute("user");
+	String userId = (null != user)?user.getUserId():"";
 	String loginResponse = (String) session.getAttribute("loginResponse");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,7 +18,8 @@
 <script type="text/javascript">
 	function validation() {
 		var resp = '<%=loginResponse%>';
-		
+		console.info("loginResponse : " +resp);
+		console.info("user : " + "<%=(user != null)?user.toString():""%>");
 		if ('<%=Constants.SUCCESS%>' == resp) {
 			alert("Login Success.");
 		} else if ('<%=Constants.FAIL%>' == resp) {

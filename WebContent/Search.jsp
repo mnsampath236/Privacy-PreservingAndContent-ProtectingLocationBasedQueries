@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
+<%@page import="com.lbq.model.User"%>
 <%
-	
+	User user = (User) session.getAttribute("user");
 %>
 <html>
 <head>
@@ -11,6 +12,7 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <script type="text/javascript">
+console.info("user : " + "<%=(user != null) ? user.toString() : ""%>");
 	function locationSearch() {
 		var searchKey = $("#searchKey").val();
 		var location = $("#location").val();
@@ -43,7 +45,7 @@
 	</section>
 	<div id="body">
 		<div id="left">
-			<form method="get" action="./MapAction">
+			<form method="post" action="./MapAction">
 				<table>
 					<tr>
 						<td>Search key</td>

@@ -42,22 +42,24 @@ public class LoginServlet extends HttpServlet {
 		UserDao dao = new UserDaoImpl();
 		User loginResult = dao.login(user);
 		HttpSession session = request.getSession();
-		request.setAttribute("user", loginResult );
-		
+		session.setAttribute("user", loginResult );
 		if(loginResult!=null && "admin@email.com".equalsIgnoreCase(username)) {
 			loginResponse= Constants.SUCCESS;
+			session.setAttribute("loginResponse", loginResponse);
 			request.getRequestDispatcher("./AdminHome.jsp").forward(request, response);
 		}else if(loginResult!=null && loginResult.getActive() != 0) {
 			loginResponse= Constants.SUCCESS;
+			session.setAttribute("loginResponse", loginResponse);
 			request.getRequestDispatcher("./UserOperations.jsp").forward(request, response);
 		}else if(loginResult!=null && loginResult.getActive() == 0){
 			loginResponse= Constants.IN_ACTIVE;
+			session.setAttribute("loginResponse", loginResponse);
 			request.getRequestDispatcher("./UserOperations.jsp").forward(request, response);
 		}else {
 			loginResponse= Constants.FAIL;
+			session.setAttribute("loginResponse", loginResponse);
 			request.getRequestDispatcher("./UserOperations.jsp").forward(request, response);
 		}
-		session.setAttribute("loginResponse", loginResponse);
 		Logger.getLogger(LoginServlet.class.getName()).log(Level.INFO, "LoginServlet loginResponse : " + loginResponse);
 	}
 
