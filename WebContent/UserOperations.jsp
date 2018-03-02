@@ -55,10 +55,22 @@
 		<p>
 		<table>
 			<tr>
-				<td><a href="./SearchAction">Search</a></td>
+				<td>
+					<a href="./SearchAction">Search</a>
+				</td>
 			</tr>
 			<tr>
-				<td><a href="./DeleteUserServlet?userid=<%=userId%>">DeleteUser</a></td>
+				<td>
+					<form action="./HistoryAction" method="post">
+						<input type="date" name="date" id="date">
+						<input type="submit" value="view History">
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="./DeleteUserServlet?userid=<%=userId%>">DeleteUser</a>
+				</td>
 			</tr>
 		</table>
 

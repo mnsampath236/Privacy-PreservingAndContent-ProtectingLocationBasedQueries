@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.lbq.db.DBUtil;
 import com.lbq.model.History;
 import com.lbq.util.Constants;
+import com.lbq.util.HistoryUtil;
 
 public class HistoryDaoImpl implements HistoryDao {
 
@@ -28,10 +29,14 @@ public class HistoryDaoImpl implements HistoryDao {
 	}
 
 	public List<History> getSearchHistoryByDate(History history) {
-		String result = Constants.EMPTY;
-
-		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate result : " + result);
-		return null;
+		List<History> historyResp = null;
+		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate request  : " + history);
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String currentTime = sdf.format(history.getDate());
+		String query = "SELECT * FROM history where user_id='"+history.getUserId()+"' and date >= '"+currentTime+"' order by date desc";
+		historyResp = HistoryUtil.parseResultSetToHistoryList(DBUtil.getData(query));
+		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate result : " + historyResp);
+		return historyResp;
 	}
 
 	public List<History> getSearchHistoryByUserId(History history) {
