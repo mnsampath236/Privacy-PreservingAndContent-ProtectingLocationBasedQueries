@@ -28,6 +28,7 @@ console.info("user : " + "<%=(user != null) ? user.toString() : ""%>");
 			<a href="index.html" class="logo"><img
 				src="./images/building_society.jpg"></a>
 			<nav id="nav">
+			<a href="./UserOperations.jsp">Home</a>
 				<a href="./index.html">Sign out</a>
 			</nav>
 		</div>

@@ -20,9 +20,10 @@
 		var resp = '<%=loginResponse%>';
 		console.info("loginResponse : " +resp);
 		console.info("user : " + "<%=(user != null)?user.toString():""%>");
-		if ('<%=Constants.SUCCESS%>' == resp) {
-			alert("Login Success.");
-		} else if ('<%=Constants.FAIL%>' == resp) {
+<%-- 		if ('<%=Constants.SUCCESS%>' == resp) { --%>
+// 			alert("Login Success.");
+// 		} else 
+		if ('<%=Constants.FAIL%>' == resp) {
 			alert("Login Fail.");
 			window.location = "./UserLogin.jsp";
 		} else if ('<%=Constants.IN_ACTIVE%>' == resp) {
