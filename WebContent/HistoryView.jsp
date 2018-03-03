@@ -36,7 +36,7 @@
 	<section id="main">
 	<div class="inner">
 		<header class="major special">
-		<h1>Users List Page</h1>
+		<h1>User Search history</h1>
 		</header>
 
 		<p>

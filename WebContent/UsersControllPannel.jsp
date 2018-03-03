@@ -27,8 +27,8 @@
 		<a href="index.html" class="logo">
 		<img src="./images/building_society.jpg"></a>
 		<nav id="nav"> 
-			<a href="UserOperations.jsp">Home</a> 
-			<a href="index.html">Logout</a>
+			<a href="./AdminHome.jsp">Home</a> 
+			<a href="./index.html">Logout</a>
 		</nav>
 	</div>
 	</header>
