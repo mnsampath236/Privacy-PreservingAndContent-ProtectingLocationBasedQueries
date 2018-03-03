@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.lbq.db.DBUtil;
 import com.lbq.model.History;
 import com.lbq.util.Constants;
+import com.lbq.util.EncryptDecryptString;
 import com.lbq.util.HistoryUtil;
 
 public class HistoryDaoImpl implements HistoryDao {
@@ -16,8 +17,9 @@ public class HistoryDaoImpl implements HistoryDao {
 		java.util.Date dt = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String currentTime = sdf.format(dt);
+		String searchKey = EncryptDecryptString.encrypt(history.getSearchKey());
 		String query = "insert into history (user_id,search_key,date) values('" + history.getUserId() + "','"
-				+ history.getSearchKey() + "','" + currentTime + "')";
+				+ searchKey + "','" + currentTime + "')";
 		int response = DBUtil.insert(query);
 		if (response > 0) {
 			result = Constants.SUCCESS;
@@ -33,7 +35,7 @@ public class HistoryDaoImpl implements HistoryDao {
 		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate request  : " + history);
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String currentTime = sdf.format(history.getDate());
-		String query = "SELECT * FROM history where user_id='"+history.getUserId()+"' and date >= '"+currentTime+"' order by date desc";
+		String query = "SELECT * FROM history where user_id='"+history.getUserId()+"' and date <= '"+currentTime+"' order by date desc";
 		historyResp = HistoryUtil.parseResultSetToHistoryList(DBUtil.getData(query));
 		Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.INFO, "getSearchHistoryByDate result : " + historyResp);
 		return historyResp;

@@ -19,7 +19,7 @@ public class HistoryUtil {
 					History history = new History();
 					history.setId(rs.getInt(1));
 					history.setUserId(rs.getString(2));
-					history.setSearchKey(rs.getString(3));
+					history.setSearchKey(EncryptDecryptString.decrypt(rs.getString(3)));
 					history.setDate(rs.getDate(4));
 					historyList.add(history);
 				}

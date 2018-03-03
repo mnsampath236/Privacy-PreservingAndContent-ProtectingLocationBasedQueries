@@ -41,11 +41,14 @@ public class HistoryAction extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		User user = (User) request.getSession().getAttribute("user");
 		History history = new History();
-		history.setUserId(user.getUserId());
+		history.setUserId(user.getUserId()!=null ? user.getUserId() : "");
 		String date = (String)request.getParameter("date");
 		System.out.println("Date :::::::::::::::::::::::: " + date + " : user : " + user.getUserId());
 		LocalDate localDate = LocalDate.parse(date);
 		Date d = Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+		d.setHours(23);
+		d.setMinutes(59);
+		d.setSeconds(59);
 		history.setDate(d);
 		HistoryDao hd = new HistoryDaoImpl();
 		List<History> searchHistoryByDate = hd.getSearchHistoryByDate(history);
